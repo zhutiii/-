@@ -86,7 +86,7 @@
 				data:$("#adminForm").serialize(),
 				success:function(result){
 					if(result.code==100){
-						window.location.href="${APP_PATH}/index.jsp"
+						window.location.href="../../index.jsp"
 					}else{
 						$("#adminError").text(result.extend.error)
 					}

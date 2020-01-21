@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +35,7 @@ public class StudentController {
 	@RequestMapping(value="/stus/{ids}",method=RequestMethod.DELETE)
 	public Msg deleteStu(@PathVariable("ids")String ids) {
 		if(ids.contains("-")) {
-			List<Integer> del_ids=new ArrayList<>();
+			List<Integer> del_ids=new ArrayList<Integer>();
 			String[] str_ids=ids.split("-");
 			for(String string:str_ids) {
 				del_ids.add(Integer.parseInt(string));

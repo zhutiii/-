@@ -56,7 +56,7 @@
 			<div id="wrapper">
 		    <ul class="sidebar navbar-nav">
 		      <li class="nav-item active">
-		        <a class="nav-link" href="${APP_PATH }/index.jsp " >
+		        <a class="nav-link" href="${APP_PATH }/main.jsp " >
 		        	<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
 		          <span>学生管理</span>
 		        </a>

@@ -1,9 +1,10 @@
 package com.ssm.stu.bean;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Msg {
+public class Msg implements Serializable {
 
 	private int code;
 	private String msg;
