@@ -31,13 +31,19 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
         //在拦截点执行前拦截，如果返回true则不执行拦截点后的操作（拦截成功）
         //返回false则不执行拦截
+
+        /* 获取session对象 */
         HttpSession session = request.getSession();
-        String uri = request.getRequestURI(); // 获取登录的uri，这个是不进行拦截的
+        /* 获取请求的uri  就是域名后面的那一节 */
+        String uri = request.getRequestURI();
+        // session.getAttribute("userInfo")!=null session中有用户信息说明登录过了
+        //uri.indexOf("/adminlog")!=-1   登录接口不拦截
+        //uri.indexOf(".")!=-1 所有带.的接口不拦截  如"*.css","*.js"等
+        //uri.indexOf("/logout")!=-1 退出接口不拦截
         if(session.getAttribute("userInfo")!=null || uri.indexOf("/adminlog")!=-1 || uri.indexOf(".")!=-1 || uri.indexOf("/logout")!=-1) {
             return true;
         }
-        //登录失败，跳转到登录页
-//        response.sendRedirect(request.getContextPath());
+        //返回错误  通过写的方式
         response.getWriter().write("{'code':500,'msg':'No Login!!'}");
         return false;
     }
