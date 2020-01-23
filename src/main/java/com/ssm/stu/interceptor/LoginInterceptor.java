@@ -12,9 +12,6 @@ import javax.servlet.http.HttpSession;
  * Function:登录拦截器。未登录则不能访问页面
  * Reason:
  *
- * @Author: fengliang
- * @version:
- * @Date: Create in 下午 4:47 2020/1/21 0021
  */
 public class LoginInterceptor implements HandlerInterceptor {
 
