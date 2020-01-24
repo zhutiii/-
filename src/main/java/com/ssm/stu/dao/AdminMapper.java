@@ -3,6 +3,8 @@ package com.ssm.stu.dao;
 import com.ssm.stu.bean.Admin;
 import com.ssm.stu.bean.AdminExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface AdminMapper {
@@ -29,4 +31,6 @@ public interface AdminMapper {
     int updateByPrimaryKey(Admin record);
     
     Admin getAdminByName(String admin_name);
+
+    List<Map<String,Object>> selectStuDormInfoByBuildingId(@Param("ids") String buildingIds);
 }

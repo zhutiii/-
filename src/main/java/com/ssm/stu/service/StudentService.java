@@ -1,5 +1,6 @@
 package com.ssm.stu.service;
 
+import com.ssm.stu.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,14 @@ import com.ssm.stu.bean.StudentExample;
 import com.ssm.stu.dao.StudentMapper;
 
 @Service
-public class StudentService {
+public class StudentService extends BaseService {
 
 	@Autowired
 	StudentMapper studentMapper;
+
+	@Autowired
+	UserDao userDao;
+
 //	查询全部学生信息
 	public List<Student> getAll() {
 		// TODO Auto-generated method stub
@@ -50,15 +55,19 @@ public class StudentService {
 	//删除信息
 	public void deleteStu(Integer id) {
 		// TODO Auto-generated method stub
-		studentMapper.deleteByPrimaryKey(id);
+		userDao.deleteByPrimaryKey(id);
 	}
 	//批量删除
 	public void deleteBatch(List<Integer> ids) {
 		// TODO Auto-generated method stub
-		StudentExample example =new StudentExample();
-		com.ssm.stu.bean.StudentExample.Criteria criteria= example.createCriteria();
-		criteria.andStuIdIn(ids);	
-		studentMapper.deleteByExample(example);
+		StringBuilder builder = new StringBuilder();
+		for (Integer id:
+		ids) {
+			builder.append(String.format("'%d',",id));
+		}
+		builder.setLength(builder.length()-1);
+		userDao.deleteByPrimaryKeys(builder.toString());
 	}
+
 
 }

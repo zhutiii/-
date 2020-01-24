@@ -95,7 +95,7 @@
 		   <div class="form-group">
 		    <label class="col-sm-2 col-md-offset-1 control-label">姓名：</label>
 		    <div class="col-sm-4">
-		      <input type="text" name="stuName" class="form-control" id="stuName_update" placeholder="赵琦">
+		      <input type="text" name="name" class="form-control" id="stuName_update" placeholder="赵琦">
 		    	<span class="help-block"></span>
 		    </div>
 		  </div>
@@ -103,31 +103,31 @@
 		    <label class="col-sm-2 col-md-offset-1 control-label">性别：</label>
 		    <div class="col-sm-6">
 		    <label class="radio-inline">
-				  <input type="radio" name="gender" id="gender1_update" value="男" checked="checked"> 男
+				  <input type="radio" name="sex" id="gender1_update" value="男" checked="checked"> 男
 				</label>
 				<label class="radio-inline">
-				  <input type="radio" name="gender" id="gender2_update" value="女"> 女
+				  <input type="radio" name="sex" id="gender2_update" value="女"> 女
 				</label>
 				</div>
 		  </div>
 		   <div class="form-group">
 		    <label class="col-sm-2 col-md-offset-1 control-label">班级：</label>
 		    <div class="col-sm-6">
-		      <input type="text" name="classname" class="form-control" id="classname_update" placeholder="数字媒体技术">
+		      <input type="text" name="zclass" class="form-control" id="classname_update" placeholder="数字媒体技术">
 		    	<span class="help-block"></span>
 		    </div>
 		  </div>
 		   <div class="form-group">
 		    <label class="col-sm-2 col-md-offset-1 control-label">学院：</label>
 		    <div class="col-sm-6">
-		      <input type="text" name="college" class="form-control" id="college_update" placeholder="医药信息工程学院">
+		      <input type="text" name="tie" class="form-control" id="college_update" placeholder="医药信息工程学院">
 		    	<span class="help-block"></span>
 		    </div>
 		  </div>
 		  <div class="form-group">
 		    <label class="col-sm-2 col-md-offset-1 control-label">宿舍号：</label>
 		    <div class="col-sm-4">
-		      <select class="form-control" name="dId">
+		      <select class="form-control" name="dormitoryId">
 				</select>
 		    </div>
 		  </div>
@@ -154,14 +154,14 @@
 		  <div class="form-group">
 		    <label class="col-sm-2 col-md-offset-1 control-label">学号：</label>
 		    <div class="col-sm-4">
-		      <input type="text" name="stuNum" class="form-control" id="stuNum_add" placeholder="1420302302">
+		      <input type="text" name="studentNumber" class="form-control" id="stuNum_add" placeholder="1420302302">
 		    	<span class="help-block"></span>
 		    </div>
 		  </div>
 		   <div class="form-group">
 		    <label class="col-sm-2 col-md-offset-1 control-label">姓名：</label>
 		    <div class="col-sm-4">
-		      <input type="text" name="stuName" class="form-control" id="stuName_add" placeholder="赵琦">
+		      <input type="text" name="name" class="form-control" id="stuName_add" placeholder="赵琦">
 		    	<span class="help-block"></span>
 		    </div>
 		  </div>
@@ -169,31 +169,31 @@
 		    <label class="col-sm-2 col-md-offset-1 control-label">性别：</label>
 		    <div class="col-sm-6">
 		    <label class="radio-inline">
-				  <input type="radio" name="gender" id="gender1_add" value="男" checked="checked"> 男
+				  <input type="radio" name="sex" id="gender1_add" value="男" checked="checked"> 男
 				</label>
 				<label class="radio-inline">
-				  <input type="radio" name="gender" id="gender2_add" value="女"> 女
+				  <input type="radio" name="sex" id="gender2_add" value="女"> 女
 				</label>
 				</div>
 		  </div>
 		   <div class="form-group">
 		    <label class="col-sm-2 col-md-offset-1 control-label">班级：</label>
 		    <div class="col-sm-6">
-		      <input type="text" name="classname" class="form-control" id="classname_add" placeholder="数字媒体技术">
+		      <input type="text" name="zclass" class="form-control" id="classname_add" placeholder="数字媒体技术">
 		    	<span class="help-block"></span>
 		    </div>
 		  </div>
 		   <div class="form-group">
 		    <label class="col-sm-2 col-md-offset-1 control-label">学院：</label>
 		    <div class="col-sm-6">
-		      <input type="text" name="college" class="form-control" id="college_add" placeholder="医药信息工程学院">
+		      <input type="text" name="tie" class="form-control" id="college_add" placeholder="医药信息工程学院">
 		    	<span class="help-block"></span>
 		    </div>
 		  </div>
 		  <div class="form-group">
 		    <label class="col-sm-2 col-md-offset-1 control-label">宿舍号：</label>
 		    <div class="col-sm-4">
-		      <select class="form-control" name="dId" >
+		      <select class="form-control" name="dormitoryId" >
 				</select>
 		    </div>
 		  </div>
@@ -300,20 +300,20 @@
 			var stu=result.extend.pageInfo.list;
 			$.each(stu,function(index,item){
 				var checkBoxId=$("<td><input type='checkbox' class='check_item'/></td>");
-				var stuIdTd=$("<td></td>").append(item.stuId);
-				var stuNumTd=$("<td></td>").append(item.stuNum);
-				var stuNameTd=$("<td></td>").append(item.stuName);
-				var genderTd=$("<td></td>").append(item.gender);
-				var classnameTd=$("<td></td>").append(item.classname);
-				var collegeTd=$("<td></td>").append(item.college);
-				var dormNumTd=$("<td></td>").append(item.dorm.dormNum);
+				var stuIdTd=$("<td></td>").append(item.userId);
+				var stuNumTd=$("<td></td>").append(item.studentNumber);
+				var stuNameTd=$("<td></td>").append(item.name);
+				var genderTd=$("<td></td>").append(item.sex);
+				var classnameTd=$("<td></td>").append(item.zclass);
+				var collegeTd=$("<td></td>").append(item.tie);
+				var dormNumTd=$("<td></td>").append(item.dormitoryName);
 				var editBtn=$("<button></button>").addClass("btn btn-primary btn-sm edit_btn")
 				            .append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
 				//添加自定义属性，表示当前学生ID
-				editBtn.attr("edit_id",item.stuId);
+				editBtn.attr("edit_id",item.userId);
 				var delBtn=$("<button></button>").addClass("btn btn-danger btn-sm delete_btn")
 	            			.append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
-				delBtn.attr("del_id",item.stuId);
+				delBtn.attr("del_id",item.userId);
 				var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn);
 				$("<tr></tr>").append(checkBoxId)
 					.append(stuIdTd)
@@ -414,7 +414,7 @@
 				success:function(result){
 					$("#stuAddModal select").append("")
 					$.each(result.extend.dorm,function(){
-						var optionEle=$("<option></option>").append(this.dormNum).attr("value",this.dormId);
+						var optionEle=$("<option></option>").append(this.dormitoryName).attr("value",this.dormitoryId);
 						optionEle.appendTo(ele);
 					})
 				}

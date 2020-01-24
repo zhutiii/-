@@ -6,8 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.ssm.stu.bean.newBean.User;
+import com.ssm.stu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -29,7 +32,11 @@ public class StudentController {
 	
 	@Autowired
 	StudentService studentService;
-	
+
+	@Autowired
+	UserService userService;
+
+
 	//删除 即可单个id删 也可批量删
 	@ResponseBody
 	@RequestMapping(value="/stus/{ids}",method=RequestMethod.DELETE)
@@ -52,8 +59,8 @@ public class StudentController {
 	//保存更新信息
 	@ResponseBody
 	@RequestMapping(value="/stus/{stuId}",method=RequestMethod.PUT)
-	public Msg updateStu(Student student) {
-		studentService.updateStu(student);
+	public Msg updateStu(User user) {
+		userService.updateByPrimaryKeySelective(user);
 		return Msg.success();
 	}
 	
@@ -77,7 +84,7 @@ public class StudentController {
 		}
 
 		//判断学号是否重复
-		boolean b=studentService.checkStuNum(stuNum);
+		boolean b=userService.checkStuNum(stuNum);
 		
 		if(b) {
 			return Msg.success();
@@ -89,17 +96,18 @@ public class StudentController {
 //	学生信息保存
 	@RequestMapping(value="/stus",method=RequestMethod.POST)
 	@ResponseBody
-	public Msg saveStu(Student student) {	
-			studentService.saveStu(student);
+	public Msg saveStu(User user) {
+			userService.insert(user);
 			return Msg.success();			
 	}
 	
 //	显示分页信息
 	@RequestMapping("/stu")
 	@ResponseBody
-	public Msg getStuWithJson(@RequestParam(value="pn",defaultValue="1")Integer pn) {
+	public Msg getStuWithJson(@RequestParam(value="pn",defaultValue="1")Integer pn, HttpServletRequest request) {
 		PageHelper.startPage(pn,5);
-		List<Student> stu=studentService.getAll();
+		User userInfo = (User) request.getSession().getAttribute("userInfo");
+		List<User> stu=userService.getUserInfoPaging(userInfo.getFloorId());
 		PageInfo page=new PageInfo(stu,5);
 		return Msg.success().add("pageInfo",page);
 	}

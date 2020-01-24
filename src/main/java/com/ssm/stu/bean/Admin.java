@@ -9,6 +9,16 @@ public class Admin {
 
     private Boolean boss;
 
+    private Integer buildId;
+
+    public Integer getBuildId() {
+        return buildId;
+    }
+
+    public void setBuildId(Integer buildId) {
+        this.buildId = buildId;
+    }
+
     public Integer getAdminId() {
         return adminId;
     }
