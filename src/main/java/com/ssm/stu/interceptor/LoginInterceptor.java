@@ -40,7 +40,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         //uri.indexOf("/adminlog")!=-1   登录接口不拦截
         //uri.indexOf(".")!=-1 所有带.的接口不拦截  如"*.css","*.js"等
         //uri.indexOf("/logout")!=-1 退出接口不拦截
-        if(session.getAttribute("userInfo")!=null || uri.indexOf("/adminlog")!=-1 || uri.indexOf(".")!=-1 || uri.indexOf("/logout")!=-1) {
+        if(session.getAttribute("userInfo")!=null || uri.indexOf("/studentLogin") != -1 || uri.indexOf("/maintainerLogin") != -1  || uri.indexOf("/adminlog")!=-1 || uri.indexOf(".")!=-1 || uri.indexOf("/logout")!=-1) {
             return true;
         }
         //返回错误  通过写的方式
