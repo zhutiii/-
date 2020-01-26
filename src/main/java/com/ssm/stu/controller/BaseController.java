@@ -20,7 +20,7 @@ public class BaseController {
     }
 
     /**
-     * 判断是不是宿管
+     * 判断是不是学生
      * @param user
      * @return
      */
@@ -29,7 +29,7 @@ public class BaseController {
     }
 
     /**
-     * 判断是不是宿管
+     * 判断是不是维修员
      * @param user
      * @return
      */

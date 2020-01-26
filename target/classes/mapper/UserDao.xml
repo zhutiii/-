@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.stu.dao.UserDao">
+  <resultMap id="BaseResultMap" type="com.ssm.stu.bean.newBean.User">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="head_portrait_url" jdbcType="VARCHAR" property="headPortraitUrl" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="student_number" jdbcType="VARCHAR" property="studentNumber" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="is_admin" jdbcType="INTEGER" property="isAdmin" />
+    <result column="floor_id" jdbcType="VARCHAR" property="floorId" />
+    <result column="dormitory_id" jdbcType="VARCHAR" property="dormitoryId" />
+    <result column="class" jdbcType="VARCHAR" property="zclass" />
+    <result column="tie" jdbcType="VARCHAR" property="tie" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="dormitory_name" jdbcType="VARCHAR" property="dormitoryName"/>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, `name`, age, sex, head_portrait_url, username, `password`, salt, student_number, 
+    nickname, email, phone, is_admin, floor_id, dormitory_id, `class`, tie, `status`, 
+    create_time, update_time
+  </sql>
+
+  <select id="selectByExample" parameterType="com.ssm.stu.bean.newBean.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+    <if test="forUpdate != null and forUpdate == true">
+      for update
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ssm.stu.bean.newBean.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <delete id="deleteByPrimaryKeys">
+    delete from user where user_id in (${ids})
+  </delete>
+  <insert id="insert" keyColumn="user_id" keyProperty="userId" parameterType="com.ssm.stu.bean.newBean.User" useGeneratedKeys="true">
+    insert into user (`name`, age, sex, 
+      head_portrait_url, username, `password`, 
+      salt, student_number, nickname, 
+      email, phone, is_admin, 
+      floor_id, dormitory_id, `class`, 
+      tie, `status`, create_time, 
+      update_time)
+    values (#{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, 
+      #{headPortraitUrl,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{salt,jdbcType=VARCHAR}, #{studentNumber,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{isAdmin,jdbcType=INTEGER}, 
+      #{floorId,jdbcType=VARCHAR}, #{dormitoryId,jdbcType=VARCHAR}, #{class,jdbcType=VARCHAR}, 
+      #{tie,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="user_id" keyProperty="userId" parameterType="com.ssm.stu.bean.newBean.User" useGeneratedKeys="true">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="headPortraitUrl != null">
+        head_portrait_url,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+      <if test="studentNumber != null">
+        student_number,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="isAdmin != null">
+        is_admin,
+      </if>
+      <if test="floorId != null">
+        floor_id,
+      </if>
+      <if test="dormitoryId != null">
+        dormitory_id,
+      </if>
+      <if test="zclass != null">
+        `class`,
+      </if>
+      <if test="tie != null">
+        tie,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="headPortraitUrl != null">
+        #{headPortraitUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="studentNumber != null">
+        #{studentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="isAdmin != null">
+        #{isAdmin,jdbcType=INTEGER},
+      </if>
+      <if test="floorId != null">
+        #{floorId,jdbcType=VARCHAR},
+      </if>
+      <if test="dormitoryId != null">
+        #{dormitoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="zclass != null">
+        #{zclass,jdbcType=VARCHAR},
+      </if>
+      <if test="tie != null">
+        #{tie,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ssm.stu.bean.newBean.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectUserInfoByUsername" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/> FROM user WHERE username=#{username}
+    <if test="userType != null">
+      and is_admin=#{userType}
+    </if>
+    limit 1
+  </select>
+  <select id="getUserInfoPaging" resultMap="BaseResultMap">
+    select u.*,d.dormitory_name dormitoryName from user u inner join dormitory d on d.dormitory_id=u.dormitory_id  where u.floor_id in (${ids}) and u.is_admin = 0
+  </select>
+  <select id="checkStuNum" resultType="java.lang.Integer">
+    select count(1) from user where student_number = #{stuNum}
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headPortraitUrl != null">
+        head_portrait_url = #{record.headPortraitUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        `password` = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salt != null">
+        salt = #{record.salt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentNumber != null">
+        student_number = #{record.studentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null">
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAdmin != null">
+        is_admin = #{record.isAdmin,jdbcType=INTEGER},
+      </if>
+      <if test="record.floorId != null">
+        floor_id = #{record.floorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dormitoryId != null">
+        dormitory_id = #{record.dormitoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.class != null">
+        `class` = #{record.class,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tie != null">
+        tie = #{record.tie,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      head_portrait_url = #{record.headPortraitUrl,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      `password` = #{record.password,jdbcType=VARCHAR},
+      salt = #{record.salt,jdbcType=VARCHAR},
+      student_number = #{record.studentNumber,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      is_admin = #{record.isAdmin,jdbcType=INTEGER},
+      floor_id = #{record.floorId,jdbcType=VARCHAR},
+      dormitory_id = #{record.dormitoryId,jdbcType=VARCHAR},
+      `class` = #{record.class,jdbcType=VARCHAR},
+      tie = #{record.tie,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.stu.bean.newBean.User">
+    update user
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="headPortraitUrl != null">
+        head_portrait_url = #{headPortraitUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="studentNumber != null">
+        student_number = #{studentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="isAdmin != null">
+        is_admin = #{isAdmin,jdbcType=INTEGER},
+      </if>
+      <if test="floorId != null">
+        floor_id = #{floorId,jdbcType=VARCHAR},
+      </if>
+      <if test="dormitoryId != null">
+        dormitory_id = #{dormitoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="zclass != null">
+        `class` = #{zclass,jdbcType=VARCHAR},
+      </if>
+      <if test="tie != null">
+        tie = #{tie,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.stu.bean.newBean.User">
+    update user
+    set `name` = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=VARCHAR},
+      head_portrait_url = #{headPortraitUrl,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      student_number = #{studentNumber,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      is_admin = #{isAdmin,jdbcType=INTEGER},
+      floor_id = #{floorId,jdbcType=VARCHAR},
+      dormitory_id = #{dormitoryId,jdbcType=VARCHAR},
+      `class` = #{class,jdbcType=VARCHAR},
+      tie = #{tie,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+
+</mapper>

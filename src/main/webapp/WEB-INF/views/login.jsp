@@ -30,16 +30,19 @@
 				<label for="tab-1" class="tab">学生登录</label>
 				<input id="tab-2" type="radio" name="tab" class="sign-up">
 				<label for="tab-2" class="tab">管理员登录</label>
+				<input id="tab-3" type="radio" name="tab" class="sign-out">
+				<label for="tab-3" class="tab">维修员登录</label>
+				
 				
 				 <div class="login-form"> 
 				 <form  id="stuForm">
 
 					<div class="sign-in-htm">
 						<div class="group">
-							<input id="username" name="loginname" type="text" class="inputClass" placeholder="学生用户名" " autocomplete="off">
+							<input id="stuName" name="stuName" type="text" class="inputClass" placeholder="学生用户名" " autocomplete="off">
 						</div> 
 						<div class="group">
-							<input id="password" name="loginpass" type="password" class="inputClass" data-type="password"  placeholder="密码" autocomplete="off">
+							<input id="stuPwd" name="stuPwd" type="password" class="inputClass" data-type="password"  placeholder="密码" autocomplete="off">
 							<label class="label errorClass" id="stuError"></label>
 						</div>
 						
@@ -69,6 +72,26 @@
 
 					</div>
 				</form>	
+<form  id="maintainForm">
+
+					<div class="sign-out-htm">
+						<div class="group">
+							<input id="maintainName" name="maintainName" type="text" class="inputClass" placeholder="维修员用户名" " autocomplete="off">
+						</div> 
+						<div class="group">
+							<input id="maintainPwd" name="maintainPwd" type="password" class="inputClass" data-type="password"  placeholder="密码" autocomplete="off">
+							<label class="label errorClass" id="maintainError"></label>
+						</div>
+						
+							<div class="hr"></div>
+						<div class="group">
+							<input type="button" id="maintainbtn"  value="登 录">
+						</div>
+
+					</div> 
+				</form>
+
+
 
 				</div>
 			</div>
@@ -93,7 +116,46 @@
 				}
 			})
 		})
+		
+		
+		$("#tab-1").click(function(){
+		$("#stuForm")[0].reset();
+		$("#stuForm").find("#stuError").text("");
+	});
+		$("#stubtn").click(function(){
+			$.ajax({
+				url:"${APP_PATH}/studentLogin",
+				type:"POST",
+				data:$("#stuForm").serialize(),
+				success:function(result){
+					if(result.code==100){
+						window.location.href="../../stu.jsp"
+					}else{
+						$("#stuError").text(result.extend.error)
+					}
+				}
+			})
+		})
 	
+		
+		$("#tab-3").click(function(){
+		$("#maintainForm")[0].reset();
+		$("#maintainForm").find("#maintainError").text("");
+	});
+		$("#maintainbtn").click(function(){
+			$.ajax({
+				url:"${APP_PATH}/maintainerLogin",
+				type:"POST",
+				data:$("#maintainForm").serialize(),
+				success:function(result){
+					if(result.code==100){
+						window.location.href="../../index.jsp"
+					}else{
+						$("#maintainError").text(result.extend.error)
+					}
+				}
+			})
+		})
 		
 	</script>
   </body>

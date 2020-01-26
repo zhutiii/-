@@ -23,14 +23,15 @@ body{
 	padding:30px 50px;
 }
 .login-html .sign-in-htm,
-.login-html .sign-up-htm{
+.login-html .sign-up-htm,
+.login-html .sign-out-htm{
 	position:absolute;
 	top:0;
 	left:0;
 	right:0;
 	bottom:0;
 	-webkit-transform:rotateY(180deg);
-	        transform:rotateY(180deg);
+	     transform:rotateY(180deg);
 	-webkit-backface-visibility:hidden;
 	        backface-visibility:hidden;
 	-webkit-transition:all .4s linear;
@@ -38,9 +39,11 @@ body{
 }
 .login-html .sign-in,
 .login-html .sign-up,
+.login-html .sign-out,
 .login-form .group .check{
 	display:none;
 }
+
 .login-html .tab,
 .login-form .group .label,
 .login-form .group .button{
@@ -55,9 +58,12 @@ body{
 	border-bottom:2px solid transparent;
 }
 .login-html .sign-in:checked + .tab,
-.login-html .sign-up:checked + .tab{
+.login-html .sign-up:checked + .tab,
+.login-html .sign-out:checked + .tab{
 	color:#fff;
 }
+
+
 .login-form{
 	min-height:345px;
 	position:relative;
@@ -90,7 +96,7 @@ body{
 	background:rgba(255,255,255,.15);
 	letter-spacing:2px;
 }
-#stubtn,#adminbtn{
+#stubtn,#adminbtn,#maintainbtn{
 	background:#3083eb;
 }
 .group {
@@ -100,12 +106,17 @@ body{
 	color:#fff;
 }
 
-.login-html .sign-in:checked + .tab + .sign-up + .tab + .login-form .sign-in-htm{
+.login-html .sign-in:checked + .tab + .sign-up +.tab + .sign-out +.tab + .login-form .sign-in-htm{
 	-webkit-transform:rotate(0);
 	    -ms-transform:rotate(0);
 	        transform:rotate(0);
 }
-.login-html .sign-up:checked + .tab + .login-form .sign-up-htm{
+.login-html .sign-up:checked + .tab + .sign-out +.tab + .login-form .sign-up-htm{
+	-webkit-transform:rotate(0);
+	    -ms-transform:rotate(0);
+	        transform:rotate(0);
+}
+.login-html .sign-out:checked + .tab + .login-form .sign-out-htm{
 	-webkit-transform:rotate(0);
 	    -ms-transform:rotate(0);
 	        transform:rotate(0);

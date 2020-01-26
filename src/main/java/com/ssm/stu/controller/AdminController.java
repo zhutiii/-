@@ -46,33 +46,33 @@ public class AdminController extends BaseController {
 			request.getSession().setAttribute("userInfo",user);
 			return Msg.success();
 		}else {
-			return (user == null)?Msg.fail().add("error", "用户不存在！"):Msg.fail().add("error", "密码不正确！");
+			return (user == null)?Msg.fail().add("error", "该管理员用户不存在！"):Msg.fail().add("error", "密码不正确！");
 		}
 
 	}
 
 	@ResponseBody
 	@RequestMapping(value="/studentLogin",method=RequestMethod.POST)
-	public Msg studentLogin(HttpServletRequest request,String adminName,String adminPwd) {
-		User user = userService.getUserInfoByUsername(adminName, Constant.USER_TYPE_STUDENT);
-		if(user != null && user.getPassword().equals(adminPwd)) {
+	public Msg studentLogin(HttpServletRequest request,String stuName,String stuPwd) {
+		User user = userService.getUserInfoByUsername(stuName, Constant.USER_TYPE_STUDENT);
+		if(user != null && user.getPassword().equals(stuPwd)) {
 			request.getSession().setAttribute("userInfo",user);
 			return Msg.success();
 		}else {
-			return (user == null)?Msg.fail().add("error", "用户不存在！"):Msg.fail().add("error", "密码不正确！");
+			return (user == null)?Msg.fail().add("error", "该学生用户不存在！"):Msg.fail().add("error", "密码不正确！");
 		}
 
 	}
 
 	@ResponseBody
 	@RequestMapping(value="/maintainerLogin",method=RequestMethod.POST)
-	public Msg maintainerLogin(HttpServletRequest request,String adminName,String adminPwd) {
-		User user = userService.getUserInfoByUsername(adminName, Constant.USER_TYPE_MAINTAINER);
-		if(user != null && user.getPassword().equals(adminPwd)) {
+	public Msg maintainerLogin(HttpServletRequest request,String maintainName,String maintainPwd) {
+		User user = userService.getUserInfoByUsername(maintainName, Constant.USER_TYPE_MAINTAINER);
+		if(user != null && user.getPassword().equals(maintainPwd)) {
 			request.getSession().setAttribute("userInfo",user);
 			return Msg.success();
 		}else {
-			return (user == null)?Msg.fail().add("error", "用户不存在！"):Msg.fail().add("error", "密码不正确！");
+			return (user == null)?Msg.fail().add("error", "该维修员用户不存在！"):Msg.fail().add("error", "密码不正确！");
 		}
 
 	}

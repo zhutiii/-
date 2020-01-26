@@ -6,6 +6,7 @@
     <result column="admin_name" jdbcType="VARCHAR" property="adminName" />
     <result column="admin_pwd" jdbcType="VARCHAR" property="adminPwd" />
     <result column="boss" jdbcType="BIT" property="boss" />
+    <result column="build_id" property="buildId"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    admin_id, admin_name, admin_pwd, boss
+    admin_id, admin_name, admin_pwd, boss, build_id
   </sql>
   <select id="selectByExample" parameterType="com.ssm.stu.bean.AdminExample" resultMap="BaseResultMap">
     select
@@ -93,7 +94,7 @@
     select 
     <include refid="Base_Column_List" />
     from admin
-    where admin_name = #{adminName,jdbcType=VARCHAR}
+     where admin_name = #{adminName,jdbcType=VARCHAR} limit 1
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from admin
@@ -107,9 +108,9 @@
   </delete>
   <insert id="insert" parameterType="com.ssm.stu.bean.Admin">
     insert into admin (admin_id, admin_name, admin_pwd, 
-      boss)
+      boss, build_id)
     values (#{adminId,jdbcType=INTEGER}, #{adminName,jdbcType=VARCHAR}, #{adminPwd,jdbcType=VARCHAR}, 
-      #{boss,jdbcType=BIT})
+      #{boss,jdbcType=BIT}, #{buildId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ssm.stu.bean.Admin">
     insert into admin
@@ -126,6 +127,9 @@
       <if test="boss != null">
         boss,
       </if>
+      <if test="buildId != null ">
+        build_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="adminId != null">
@@ -139,6 +143,9 @@
       </if>
       <if test="boss != null">
         #{boss,jdbcType=BIT},
+      </if>
+      <if test="buildId != null">
+        #{buildId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -190,6 +197,9 @@
       <if test="boss != null">
         boss = #{boss,jdbcType=BIT},
       </if>
+      <if test="buildId != null ">
+        build_id = #{buildId}
+      </if>
     </set>
     where admin_id = #{adminId,jdbcType=INTEGER}
   </update>
@@ -200,4 +210,18 @@
       boss = #{boss,jdbcType=BIT}
     where admin_id = #{adminId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectStuDormInfoByBuildingId" resultType="java.util.Map">
+    SELECT
+        s.*,
+        d.dorm_num,
+        b.build_name,
+        b.build_type
+    FROM
+        admin a
+        INNER JOIN building b ON a.build_id = b.build_id
+        INNER JOIN student s ON b.build_id = s.build_id
+        INNER JOIN dorm d ON s.d_id = d.dorm_id
+    WHERE b.build_id in (${ids})
+  </select>
 </mapper>
