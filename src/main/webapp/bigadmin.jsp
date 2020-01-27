@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>宿舍管理系统 - 管理员用户</title>
+<title>宿舍管理系统 - 总管理员用户</title>
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
@@ -38,7 +38,7 @@
       <ul class="nav navbar-nav navbar-right">
       	 
         <li>
-			<a href="#">欢迎管理员：</a></span>
+			<a href="#">欢迎总管理员：</a></span>
         	</li>
         	<li>
 			<a><span class="glyphicon glyphicon-user" aria-hidden="true" style="color: #fff;"></span></a>
@@ -56,16 +56,21 @@
 			<div id="wrapper">
 		    <ul class="sidebar navbar-nav">
 		      <li class="nav-item active">
-		        <a class="nav-link" href="${APP_PATH }/index.jsp " >
+		        <a class="nav-link" href="${APP_PATH }/bigadmin.jsp " >
 		        	<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
 		          <span>学生管理</span>
 		        </a>
 		      </li>
 		
 		      <li class="nav-item">
-		        <a class="nav-link" href="${APP_PATH }/admin2.jsp">
+		        <a class="nav-link" href="${APP_PATH }/bigadmin2.jsp">
 		        	<span class="glyphicon glyphicon-scale" aria-hidden="true"></span>
-		          <span>水电费管理</span></a>
+		          <span>管理员管理</span></a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="${APP_PATH }/bigadmin3.jsp">
+		        	<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+		          <span>维修员管理</span></a>
 		      </li>
 		    </ul>
 		</div>

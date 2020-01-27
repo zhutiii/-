@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>宿舍管理系统 - 管理员用户</title>
+<title>宿舍管理系统 - 总管理员用户</title>
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
@@ -38,7 +38,7 @@
       <ul class="nav navbar-nav navbar-right">
       	 
         <li>
-			<a href="#">欢迎管理员：</a></span>
+			<a href="#">欢迎总管理员：</a></span>
         	</li>
         	<li>
 			<a><span class="glyphicon glyphicon-user" aria-hidden="true" style="color: #fff;"></span></a>
@@ -56,151 +56,28 @@
 			<div id="wrapper">
 		    <ul class="sidebar navbar-nav">
 		      <li class="nav-item active">
-		        <a class="nav-link" href="${APP_PATH }/index.jsp " >
+		        <a class="nav-link" href="${APP_PATH }/bigadmin.jsp " >
 		        	<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
 		          <span>学生管理</span>
 		        </a>
 		      </li>
 		
 		      <li class="nav-item">
-		        <a class="nav-link" href="${APP_PATH }/admin2.jsp">
+		        <a class="nav-link" href="${APP_PATH }/bigadmin2.jsp">
 		        	<span class="glyphicon glyphicon-scale" aria-hidden="true"></span>
-		          <span>水电费管理</span></a>
+		          <span>管理员管理</span></a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="${APP_PATH }/bigadmin3.jsp">
+		        	<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+		          <span>维修员管理</span></a>
 		      </li>
 		    </ul>
 		</div>
 		</div>
 <div class="content-contain">
-	<!-- 学生信息修改模态框 -->
-<div class="modal fade" id="stuUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">学生信息修改</h4>
-      </div>
-      <div class="modal-body ">
-		        <form class="form-horizontal">
-		  <div class="form-group">
-		    <label class="col-sm-2 col-md-offset-1 control-label">学号：</label>
-		    <div class="col-sm-4">
-		      <p class="form-control-static" id="stuNum_update_static"></p>
-		    </div>
-		  </div>
-		   <div class="form-group">
-		    <label class="col-sm-2 col-md-offset-1 control-label">姓名：</label>
-		    <div class="col-sm-4">
-		      <input type="text" name="name" class="form-control" id="stuName_update" placeholder="赵琦">
-		    	<span class="help-block"></span>
-		    </div>
-		  </div>
-		   <div class="form-group">
-		    <label class="col-sm-2 col-md-offset-1 control-label">性别：</label>
-		    <div class="col-sm-6">
-		    <label class="radio-inline">
-				  <input type="radio" name="sex" id="gender1_update" value="男" checked="checked"> 男
-				</label>
-				<label class="radio-inline">
-				  <input type="radio" name="sex" id="gender2_update" value="女"> 女
-				</label>
-				</div>
-		  </div>
-		   <div class="form-group">
-		    <label class="col-sm-2 col-md-offset-1 control-label">班级：</label>
-		    <div class="col-sm-6">
-		      <input type="text" name="zclass" class="form-control" id="classname_update" placeholder="数字媒体技术">
-		    	<span class="help-block"></span>
-		    </div>
-		  </div>
-		   <div class="form-group">
-		    <label class="col-sm-2 col-md-offset-1 control-label">学院：</label>
-		    <div class="col-sm-6">
-		      <input type="text" name="tie" class="form-control" id="college_update" placeholder="医药信息工程学院">
-		    	<span class="help-block"></span>
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label class="col-sm-2 col-md-offset-1 control-label">宿舍号：</label>
-		    <div class="col-sm-4">
-		      <select class="form-control" name="dormitoryId">
-				</select>
-		    </div>
-		  </div>
-		</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary" id="stu_update_btn">更新</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- 学生信息增加模态框 -->
-<div class="modal fade" id="stuAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">学生信息添加</h4>
-      </div>
-      <div class="modal-body ">
-		        <form class="form-horizontal">
-		  <div class="form-group">
-		    <label class="col-sm-2 col-md-offset-1 control-label">学号：</label>
-		    <div class="col-sm-4">
-		      <input type="text" name="studentNumber" class="form-control" id="stuNum_add" placeholder="1420302302">
-		    	<span class="help-block"></span>
-		    </div>
-		  </div>
-		   <div class="form-group">
-		    <label class="col-sm-2 col-md-offset-1 control-label">姓名：</label>
-		    <div class="col-sm-4">
-		      <input type="text" name="name" class="form-control" id="stuName_add" placeholder="赵琦">
-		    	<span class="help-block"></span>
-		    </div>
-		  </div>
-		   <div class="form-group">
-		    <label class="col-sm-2 col-md-offset-1 control-label">性别：</label>
-		    <div class="col-sm-6">
-		    <label class="radio-inline">
-				  <input type="radio" name="sex" id="gender1_add" value="男" checked="checked"> 男
-				</label>
-				<label class="radio-inline">
-				  <input type="radio" name="sex" id="gender2_add" value="女"> 女
-				</label>
-				</div>
-		  </div>
-		   <div class="form-group">
-		    <label class="col-sm-2 col-md-offset-1 control-label">班级：</label>
-		    <div class="col-sm-6">
-		      <input type="text" name="zclass" class="form-control" id="classname_add" placeholder="数字媒体技术">
-		    	<span class="help-block"></span>
-		    </div>
-		  </div>
-		   <div class="form-group">
-		    <label class="col-sm-2 col-md-offset-1 control-label">学院：</label>
-		    <div class="col-sm-6">
-		      <input type="text" name="tie" class="form-control" id="college_add" placeholder="医药信息工程学院">
-		    	<span class="help-block"></span>
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label class="col-sm-2 col-md-offset-1 control-label">宿舍号：</label>
-		    <div class="col-sm-4">
-		      <select class="form-control" name="dormitoryId" >
-				</select>
-		    </div>
-		  </div>
-		</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary" id="stu_save_btn">保存</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 <!-- 退出模态框 -->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -223,7 +100,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-			    <h1>学生信息</h1>
+			    <h1>管理员信息</h1>
 			</div>
 		</div>
 		<div class="row">
@@ -242,12 +119,11 @@
 								<input type="checkbox" id="check_all"/>
 							</th>
 							<th>#</th>
-							<th>学号</th>
 							<th>姓名</th>
-							<th>性别</th>
-							<th>班级</th>
-							<th>学院</th>
-							<th>宿舍号</th>
+							<th>手机号</th>
+							<th>账号</th>
+							<th>密码</th>
+							<th>所管理楼栋</th>
 							<th>操作</th>
 						</tr>
 					</thead>

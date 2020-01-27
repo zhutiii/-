@@ -15,7 +15,7 @@
 	href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.css"
 	rel="stylesheet">
 	<link
-	href="${APP_PATH }/static/css/stu1.css"
+	href="${APP_PATH }/static/css/index.css"
 	rel="stylesheet">
 <script
 	src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
@@ -53,46 +53,83 @@
 </nav>
 
 
-<div class="sidebar" >
-	<div id="wrapper">
-    <ul class="sidebar navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="${APP_PATH }/stu.jsp" >
-        	<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
-          <span>个人信息查看</span>
-        </a>
-      </li>
+<div class="main-container">
+		<div class="sidebar" >
+			<div id="wrapper">
+		    <ul class="sidebar navbar-nav">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="${APP_PATH }/stu.jsp " >
+		        	<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+		          <span>个人信息查看</span>
+		        </a>
+		      </li>
+		
+		      <li class="nav-item">
+		        <a class="nav-link" href="${APP_PATH }/stu2.jsp">
+		        	<span class="glyphicon glyphicon-scale" aria-hidden="true"></span>
+		          <span>水电费查看</span></a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="${APP_PATH }/stu3.jsp">
+		          <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+		          <span>设备报修维护</span></a>
+		      </li>
+		    </ul>
+		</div>
+		</div>
 
-      <li class="nav-item">
-        <a class="nav-link" href="${APP_PATH }/stu2.jsp">
-        	<span class="glyphicon glyphicon-scale" aria-hidden="true"></span>
-          <span>水电费查看</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="${APP_PATH }/stu3.jsp">
-          <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
-          <span>设备报修维护</span></a>
-      </li>
-    </ul>
 
+<!-- 页面搭建 -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			    <h1>水电费信息</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-8">
+				<button class="btn btn-primary" id="stu_add_modal_btn">新增</button>
+				<button class="btn btn-danger" id="stu_delete_all_btn">删除</button>
+			</div>
+		</div>
+		<div class="table-container" style="height:300px;">
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table table-hover" id="stu_tables">
+					<thead>
+						<tr>
+							<th>
+								<input type="checkbox" id="check_all"/>
+							</th>
+							<th>#</th>
+							<th>宿舍号</th>
+							<th>用水量</th>
+							<th>价格</th>
+							<th>时间</th>
+							<th>缴费情况</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+					</tbody>
+				</table>
+			</div>
+		</div>
+		</div>
+		<div class="row">
+			<!--分页文字信息  -->
+			<div class="col-md-6" id="page_info_area"></div>
+			<!-- 分页条信息 -->
+			<div class="col-md-6" id="page_nav_area">
+				
+			</div>
+		</div>
+	</div>
 </div>
-<img src="static/images/stu.jpg" alt="">
-     <div class="container">
-		<p><h3 style="text-align: right;padding-right: 20px;">个人信息</h3></p>
-		<hr>
-		<ul class="xinxi">
-			<li>姓名：</li>
-			<li>性别：</li>
-			<li>学号：</li>
-			<li>班级：</li>
-			<li>学院：</li>
-			<li>宿舍号：</li>
-			<li>宿舍管理员：</li>
-			<li>宿管联系方式：</li>
-	</ul>
+</div>
 
-</div>
-</div>
+
 
 <!-- 退出模态框 -->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog">

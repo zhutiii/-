@@ -109,7 +109,7 @@
 				data:$("#adminForm").serialize(),
 				success:function(result){
 					if(result.code==100){
-						window.location.href="../../index.jsp"
+						window.location.href="${APP_PATH}/index.jsp"
 					}else{
 						$("#adminError").text(result.extend.error)
 					}
@@ -129,7 +129,7 @@
 				data:$("#stuForm").serialize(),
 				success:function(result){
 					if(result.code==100){
-						window.location.href="../../stu.jsp"
+						window.location.href="${APP_PATH}/stu.jsp"
 					}else{
 						$("#stuError").text(result.extend.error)
 					}
@@ -149,7 +149,7 @@
 				data:$("#maintainForm").serialize(),
 				success:function(result){
 					if(result.code==100){
-						window.location.href="../../index.jsp"
+						window.location.href="${APP_PATH}/mend.jsp"
 					}else{
 						$("#maintainError").text(result.extend.error)
 					}
