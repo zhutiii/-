@@ -113,6 +113,17 @@ public class User implements Serializable {
      */
     private String dormitoryName;
 
+    /**
+     * 管理员名字
+     */
+    private String adminName;
+
+
+    /**
+     * 管理员手机号
+     */
+    private String adminPhone;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getUserId() {
@@ -129,6 +140,22 @@ public class User implements Serializable {
 
     public void setDormitoryName(String dormitoryName) {
         this.dormitoryName = dormitoryName;
+    }
+
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
+    }
+
+    public String getAdminPhone() {
+        return adminPhone;
+    }
+
+    public void setAdminPhone(String adminPhone) {
+        this.adminPhone = adminPhone;
     }
 
     public String getName() {

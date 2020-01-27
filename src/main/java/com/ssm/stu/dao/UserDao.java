@@ -29,6 +29,7 @@ public interface UserDao {
 
     int updateByPrimaryKey(User record);
 
+    User selectAdminInfoByFloorId(@Param("floorId") String id);
     /**
      * 通过用户名获取用户信息
      * @param username

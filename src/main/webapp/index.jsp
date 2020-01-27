@@ -1,5 +1,6 @@
+<%@ page import="com.ssm.stu.bean.newBean.User" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+		 pageEncoding="utf-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -8,6 +9,7 @@
 <title>宿舍管理系统 - 管理员用户</title>
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
+	User userInfo = (User) request.getSession().getAttribute("userInfo");
 %>
 <script type="text/javascript"
 	src="${APP_PATH }/static/jquery/jquery-1.12.4.min.js"></script>
@@ -38,7 +40,7 @@
       <ul class="nav navbar-nav navbar-right">
       	 
         <li>
-			<a href="#">欢迎管理员：</a></span>
+			<a href="#">欢迎管理员：${ userInfo.getName()}</a></span>
         	</li>
         	<li>
 			<a><span class="glyphicon glyphicon-user" aria-hidden="true" style="color: #fff;"></span></a>

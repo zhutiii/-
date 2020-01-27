@@ -25,24 +25,14 @@ public class AdminController extends BaseController {
 
 	@Autowired
 	UserService userService;
-/*	@ResponseBody
-	@RequestMapping(value="/adminlog",method=RequestMethod.POST)
-	public Msg adminlog(HttpServletRequest request,String adminName,String adminPwd) {
-		Admin admin=adminService.adminlog(adminName);
-		if(admin!=null&&admin.getAdminPwd().equals(adminPwd)) {
-			request.getSession().setAttribute("userInfo",admin);
-			return Msg.success();
-		}else {
-			return (admin == null)?Msg.fail().add("error", "用户不存在！"):Msg.fail().add("error", "密码不正确！");
-		}
-
-	}*/
 
 	@ResponseBody
 	@RequestMapping(value="/adminlog",method=RequestMethod.POST)
 	public Msg adminlog(HttpServletRequest request,String adminName,String adminPwd) {
 		User user = userService.getUserInfoByUsername(adminName, Constant.USER_TYPE_SUPERVISOR_OF_DORM);
 		if(user != null && user.getPassword().equals(adminPwd)) {
+			//密码信息不存session
+			user.setPassword("");
 			request.getSession().setAttribute("userInfo",user);
 			return Msg.success();
 		}else {
@@ -56,7 +46,13 @@ public class AdminController extends BaseController {
 	public Msg studentLogin(HttpServletRequest request,String stuName,String stuPwd) {
 		User user = userService.getUserInfoByUsername(stuName, Constant.USER_TYPE_STUDENT);
 		if(user != null && user.getPassword().equals(stuPwd)) {
+			//密码信息不存session
+			user.setPassword("");
 			request.getSession().setAttribute("userInfo",user);
+			//TODO 获取该学生的管理员用户信息
+			User adminInfo = userService.selectAdminInfoByFloorId(user.getFloorId());
+			user.setAdminName(adminInfo.getName());
+			user.setAdminPhone(adminInfo.getPhone());
 			return Msg.success();
 		}else {
 			return (user == null)?Msg.fail().add("error", "该学生用户不存在！"):Msg.fail().add("error", "密码不正确！");
@@ -69,6 +65,8 @@ public class AdminController extends BaseController {
 	public Msg maintainerLogin(HttpServletRequest request,String maintainName,String maintainPwd) {
 		User user = userService.getUserInfoByUsername(maintainName, Constant.USER_TYPE_MAINTAINER);
 		if(user != null && user.getPassword().equals(maintainPwd)) {
+			//密码信息不存session
+			user.setPassword("");
 			request.getSession().setAttribute("userInfo",user);
 			return Msg.success();
 		}else {

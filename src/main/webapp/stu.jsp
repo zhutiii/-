@@ -1,5 +1,6 @@
+<%@ page import="com.ssm.stu.bean.newBean.User" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+         pageEncoding="utf-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -8,6 +9,7 @@
 <title>宿舍管理系统 - 学生用户</title>
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
+    User userInfo = (User) request.getSession().getAttribute("userInfo");
 %>
 <script type="text/javascript"
 	src="${APP_PATH }/static/jquery/jquery-1.12.4.min.js"></script>
@@ -38,7 +40,7 @@
       <ul class="nav navbar-nav navbar-right">
       	 
         <li>
-			<a href="#">欢迎学生：</a></span>
+			<a href="#">欢迎学生：${userInfo.getName()}</a></span>
         	</li>
         	<li>
 			<a><span class="glyphicon glyphicon-user" aria-hidden="true" style="color: #fff;"></span></a>
@@ -81,14 +83,14 @@
 		<p><h3 style="text-align: right;padding-right: 20px;">个人信息</h3></p>
 		<hr>
 		<ul class="xinxi">
-			<li>姓名：</li>
-			<li>性别：</li>
-			<li>学号：</li>
-			<li>班级：</li>
-			<li>学院：</li>
-			<li>宿舍号：</li>
-			<li>宿舍管理员：</li>
-			<li>宿管联系方式：</li>
+			<li>姓名：${userInfo.getName()}</li>
+			<li>性别：${userInfo.getSex()}</li>
+			<li>学号：${userInfo.getStudentNumber()}</li>
+			<li>班级：${userInfo.getZclass()}</li>
+			<li>学院：${userInfo.getTie()}</li>
+			<li>宿舍号：${userInfo.getDormitoryId()}</li>
+			<li>宿舍管理员：${userInfo.getAdminName()}</li>
+			<li>宿管联系方式：${userInfo.getAdminPhone()}</li>
 	</ul>
 
 </div>

@@ -469,5 +469,8 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 
+  <select id="selectAdminInfoByFloorId" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/> FROM user WHERE floor_id LIKE #{floorId} AND is_admin = 1 AND status = 1
+  </select>
 
 </mapper>

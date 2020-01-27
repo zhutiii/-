@@ -5,6 +5,7 @@ import com.ssm.stu.bean.newBean.User;
 import com.ssm.stu.dao.DormitoryDao;
 import com.ssm.stu.dao.FloorDao;
 import com.ssm.stu.dao.UserDao;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,5 +68,9 @@ public class UserService extends BaseService {
         Dormitory dormitory = dormitoryDao.selectByPrimaryKey(Integer.parseInt(user.getDormitoryId()));
         user.setFloorId(dormitory.getFloorId().toString());
         return userDao.updateByPrimaryKeySelective(user);
+    }
+
+    public User selectAdminInfoByFloorId(String id) {
+        return userDao.selectAdminInfoByFloorId(id);
     }
 }
