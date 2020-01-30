@@ -283,7 +283,11 @@
     limit 1
   </select>
   <select id="getUserInfoPaging" resultMap="BaseResultMap">
-    select u.*,d.dormitory_name dormitoryName from user u inner join dormitory d on d.dormitory_id=u.dormitory_id  where u.floor_id in (${ids}) and u.is_admin = 0
+    select u.*,d.dormitory_name dormitoryName from user u inner join dormitory d on d.dormitory_id=u.dormitory_id  where
+    <if test="ids != null">
+      u.floor_id in (${ids}) and
+    </if>
+    u.is_admin = 0
   </select>
   <select id="checkStuNum" resultType="java.lang.Integer">
     select count(1) from user where student_number = #{stuNum}

@@ -109,8 +109,12 @@
 				data:$("#adminForm").serialize(),
 				success:function(result){
 					if(result.code==100){
+						if(${userInfo.getIsAdmin()==3}){
+							window.location.href="${APP_PATH}/bigadmin.jsp"
+						}
 						window.location.href="${APP_PATH}/index.jsp"
-					}else{
+					}
+					else{
 						$("#adminError").text(result.extend.error)
 					}
 				}
