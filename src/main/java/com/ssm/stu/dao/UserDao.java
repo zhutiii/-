@@ -39,10 +39,10 @@ public interface UserDao {
 
     /**
      * 分页获取数据
-     * @param floorId
+     * @param ids
      * @return
      */
-    List<User> getUserInfoPaging(@Param("ids") String floorId);
+    List<User> getUserInfoPaging(@Param("ids") String ids);
 
     int deleteByPrimaryKeys(@Param("ids") String ids);
 

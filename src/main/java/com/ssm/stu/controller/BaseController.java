@@ -36,4 +36,14 @@ public class BaseController {
     protected Boolean isMaintainer(User user){
         return user.getIsAdmin() == Constant.USER_TYPE_MAINTAINER;
     }
+
+    /**
+     * 判断是不是超管
+     * @param user
+     * @return
+     */
+    protected Boolean isBoss(User user){
+        return user.getIsAdmin() == Constant.USER_TYPE_BOSS;
+    }
+
 }

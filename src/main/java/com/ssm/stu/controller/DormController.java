@@ -16,7 +16,7 @@ import com.ssm.stu.service.DormService;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class DormController {
+public class DormController extends BaseController {
 
 	@Autowired
 	private DormService dormService;
@@ -25,6 +25,10 @@ public class DormController {
 	@ResponseBody
 	public Msg getDorm(HttpServletRequest request) {
 		User userInfo = (User) request.getSession().getAttribute("userInfo");
+//		不是管理员，也不是超管。直接返回无权限
+		if (!(isAdmin(userInfo) || isBoss(userInfo))) {
+			return Msg.insufficientPrivileges();
+		}
 		List<Dormitory> list=dormService.getDorm(userInfo.getFloorId());
 		return Msg.success().add("dorm", list);
 	}

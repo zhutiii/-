@@ -44,10 +44,12 @@ public class UserService extends BaseService {
      * 通过账号获取用户信息
      * @return
      */
-    public List<User> getUserInfoPaging(String floorId) {
+    public List<User> getUserInfoPaging(String floorId,Boolean b) {
         //无楼层返回空数组
-        if (floorId == null) {
+        if (floorId == null && b) {
             return new ArrayList<>(1);
+        } else if (floorId == null && b){
+            return userDao.getUserInfoPaging(null);
         }
         return userDao.getUserInfoPaging(listToMysqlInString(Arrays.asList(floorId.split(","))));
     }

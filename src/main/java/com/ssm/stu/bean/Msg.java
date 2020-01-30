@@ -22,6 +22,13 @@ public class Msg implements Serializable {
 		result.setMsg("处理失败");
 		return result;
 	}
+	public static Msg insufficientPrivileges() {
+		Msg result=new Msg();
+		result.setCode(500);
+		result.setMsg("权限不足");
+		return result;
+	}
+
 	public Msg add(String key,Object value) {
 		this.getExtend().put(key, value);
 		return this;
