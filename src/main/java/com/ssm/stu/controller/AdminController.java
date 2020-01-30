@@ -30,6 +30,9 @@ public class AdminController extends BaseController {
 	@RequestMapping(value="/adminlog",method=RequestMethod.POST)
 	public Msg adminlog(HttpServletRequest request,String adminName,String adminPwd) {
 		User user = userService.getUserInfoByUsername(adminName, Constant.USER_TYPE_SUPERVISOR_OF_DORM);
+		if (user == null) {
+			user = userService.getUserInfoByUsername(adminName, Constant.USER_TYPE_BOSS);
+		}
 		if(user != null && user.getPassword().equals(adminPwd)) {
 			//密码信息不存session
 			user.setPassword("");
