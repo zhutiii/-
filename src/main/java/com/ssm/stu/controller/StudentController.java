@@ -28,7 +28,7 @@ import com.ssm.stu.bean.Student;
 import com.ssm.stu.service.StudentService;
 
 @Controller
-public class StudentController {
+public class StudentController extends BaseController {
 	
 	@Autowired
 	StudentService studentService;
@@ -40,7 +40,12 @@ public class StudentController {
 	//删除 即可单个id删 也可批量删
 	@ResponseBody
 	@RequestMapping(value="/stus/{ids}",method=RequestMethod.DELETE)
-	public Msg deleteStu(@PathVariable("ids")String ids) {
+	public Msg deleteStu(HttpServletRequest request,@PathVariable("ids")String ids) {
+		User userInfo = (User) request.getSession().getAttribute("userInfo");
+//		不是管理员，也不是超管。直接返回无权限
+		if (!(isAdmin(userInfo) || isBoss(userInfo))) {
+			return Msg.insufficientPrivileges();
+		}
 		if(ids.contains("-")) {
 			List<Integer> del_ids=new ArrayList<Integer>();
 			String[] str_ids=ids.split("-");
@@ -59,7 +64,12 @@ public class StudentController {
 	//保存更新信息
 	@ResponseBody
 	@RequestMapping(value="/stus/{stuId}",method=RequestMethod.PUT)
-	public Msg updateStu(User user) {
+	public Msg updateStu(HttpServletRequest request,User user) {
+		User userInfo = (User) request.getSession().getAttribute("userInfo");
+//		不是管理员，也不是超管。直接返回无权限
+		if (!(isAdmin(userInfo) || isBoss(userInfo))) {
+			return Msg.insufficientPrivileges();
+		}
 		userService.updateByPrimaryKeySelective(user);
 		return Msg.success();
 	}
@@ -67,7 +77,12 @@ public class StudentController {
 	//查询所有学生信息
 	@RequestMapping(value="/stus/{id}",method=RequestMethod.GET)
 	@ResponseBody
-	public Msg getStu(@PathVariable("id")Integer id) {
+	public Msg getStu(HttpServletRequest request,@PathVariable("id")Integer id) {
+		User userInfo = (User) request.getSession().getAttribute("userInfo");
+//		不是管理员，也不是超管。直接返回无权限
+		if (!(isAdmin(userInfo) || isBoss(userInfo))) {
+			return Msg.insufficientPrivileges();
+		}
 		Student student=studentService.getStu(id);
 		return Msg.success().add("stu", student);
 	}
@@ -96,17 +111,26 @@ public class StudentController {
 //	学生信息保存
 	@RequestMapping(value="/stus",method=RequestMethod.POST)
 	@ResponseBody
-	public Msg saveStu(User user) {
-			userService.insert(user);
-			return Msg.success();			
+	public Msg saveStu(HttpServletRequest request,User user) {
+		User userInfo = (User) request.getSession().getAttribute("userInfo");
+//		不是管理员，也不是超管。直接返回无权限
+		if (!(isAdmin(userInfo) || isBoss(userInfo))) {
+			return Msg.insufficientPrivileges();
+		}
+		userService.insert(user);
+		return Msg.success();
 	}
 	
 //	显示分页信息
 	@RequestMapping("/stu")
 	@ResponseBody
 	public Msg getStuWithJson(@RequestParam(value="pn",defaultValue="1")Integer pn, HttpServletRequest request) {
-		PageHelper.startPage(pn,5);
 		User userInfo = (User) request.getSession().getAttribute("userInfo");
+//		不是管理员，也不是超管。直接返回无权限
+		if (!(isAdmin(userInfo) || isBoss(userInfo))) {
+			return Msg.insufficientPrivileges();
+		}
+		PageHelper.startPage(pn,5);
 		List<User> stu=userService.getUserInfoPaging(userInfo.getFloorId());
 		PageInfo page=new PageInfo(stu,5);
 		return Msg.success().add("pageInfo",page);
