@@ -108,9 +108,11 @@
 				type:"POST",
 				data:$("#adminForm").serialize(),
 				success:function(result){
+					console.log(result.extend.userType==3)
 					if(result.code==100){
 						if(result.extend.userType==3){
-							window.location.href="${APP_PATH}/bigAdmin.jsp"
+							window.location.href="${APP_PATH}/bigadmin.jsp"
+							return;
 						}
 						window.location.href="${APP_PATH}/index.jsp"
 					}else{
