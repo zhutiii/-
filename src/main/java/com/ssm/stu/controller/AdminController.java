@@ -37,7 +37,7 @@ public class AdminController extends BaseController {
 			//密码信息不存session
 			user.setPassword("");
 			request.getSession().setAttribute("userInfo",user);
-			return Msg.success();
+			return Msg.success().add("userType",user.getIsAdmin());
 		}else {
 			return (user == null)?Msg.fail().add("error", "该管理员用户不存在！"):Msg.fail().add("error", "密码不正确！");
 		}
