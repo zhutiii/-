@@ -102,7 +102,7 @@ public class StudentController {
 	}
 	
 //	显示分页信息
-	@RequestMapping("/stu")
+	@RequestMapping("/stu") 
 	@ResponseBody
 	public Msg getStuWithJson(@RequestParam(value="pn",defaultValue="1")Integer pn, HttpServletRequest request) {
 		PageHelper.startPage(pn,5);

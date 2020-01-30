@@ -18,6 +18,7 @@
     <result column="classname" jdbcType="VARCHAR" property="classname" />
     <result column="college" jdbcType="VARCHAR" property="college" />
     <result column="d_id" jdbcType="INTEGER" property="dId" />
+    <!--指定联合查询出的宿舍字段的封装  -->
     <association property="dorm" javaType="com.ssm.stu.bean.Dorm">
     	<id column="dorm_id" property="dormId"/>
     	<result column="dorm_num" property="dormNum"/>
