@@ -22,4 +22,9 @@ public class Constant {
 	 * 维修人员
 	 */
 	public static final Integer USER_TYPE_MAINTAINER = 2;
+
+	/**
+	 * 维修人员
+	 */
+	public static final Integer USER_TYPE_BOSS = 3;
 }
