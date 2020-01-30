@@ -130,10 +130,18 @@ public class StudentController extends BaseController {
 		if (!(isAdmin(userInfo) || isBoss(userInfo))) {
 			return Msg.insufficientPrivileges();
 		}
-		PageHelper.startPage(pn,5);
-		List<User> stu=userService.getUserInfoPaging(userInfo.getFloorId());
-		PageInfo page=new PageInfo(stu,5);
-		return Msg.success().add("pageInfo",page);
+		if (isAdmin(userInfo)) {
+			PageHelper.startPage(pn,5);
+			List<User> stu=userService.getUserInfoPaging(userInfo.getFloorId(),false);
+			PageInfo page=new PageInfo(stu,5);
+			return Msg.success().add("pageInfo",page);
+		} else if (isBoss(userInfo)) {
+			PageHelper.startPage(pn,5);
+			List<User> stu=userService.getUserInfoPaging(userInfo.getFloorId(),true);
+			PageInfo page=new PageInfo(stu,5);
+			return Msg.success().add("pageInfo",page);
+		}
+		return Msg.fail();
 	}
 	
 }
